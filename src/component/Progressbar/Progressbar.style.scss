@@ -1,0 +1,132 @@
+:root {
+  --progressbar-bg-grey: #ccc;
+  --progressbar-bg-primary: var(--primary-base-color);
+  --progressbar-text-grey: #888;
+  --progressbar-text-white: #fff;
+  --progressbar-text-active: #000;
+}
+
+.Progressbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-Steps {
+    width: 100%;
+    display: grid;
+  }
+
+  &-Step {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+  }
+
+  &-Step-Line {
+    width: 100%;
+    height: 0.35rem;
+    transform: translateY(1.5rem);
+    background-color: var(--progressbar-bg-grey);
+    border-radius: 5px;
+    position: relative;
+  }
+
+  &-Step-Line-Fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--primary-base-color);
+  }
+
+  &-Step-Block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+  }
+
+  &-Step:last-child &-Step-Block {
+    display: none;
+  }
+
+  &-Step-Icon {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--progressbar-bg-grey);
+    border-radius: 50%;
+    z-index: 2;
+    color: var(--progressbar-text-grey);
+  }
+
+  &-Step-Icon span {
+    position: absolute;
+    font-size: 1.8rem;
+    top: 50%;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%, -42%);
+  }
+
+  &-Step-Label {
+    margin-bottom: 0;
+    margin-top: 1rem;
+    color: var(--progressbar-text-grey);
+    font-weight: bold;
+    white-space: nowrap;
+    text-transform: capitalize;
+  }
+
+  &-Step.Current-Step &-Step-Line-Fill {
+    animation: fill-bar 1s forwards ease-in-out;
+  }
+
+  &-Step.Current-Step &-Step-Icon {
+    animation: fill-block 0.25s forwards ease-in-out;
+    animation-delay: 1s;
+  }
+
+  &-Step.Prev-Active-Step &-Step-Line {
+    background-color: var(--primary-base-color);
+  }
+
+  &-Step.Prev-Active-Step &-Step-Icon {
+    background-color: var(--primary-base-color);
+    color: var(--progressbar-text-white);
+  }
+
+  &-Step.Prev-Active-Step &-Step-Label {
+    color: var(--progressbar-text-active);
+  }
+}
+
+@keyframes fill-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fill-block {
+  0% {
+    background-color: var(--progressbar-bg-grey);
+    color: var(--progressbar-text-grey);
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    color: var(--progressbar-text-white);
+    background-color: var(--primary-base-color);
+  }
+}
